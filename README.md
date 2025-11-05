@@ -9,7 +9,7 @@
 
 ---
 
-## Features (Current & Future Roadmap)
+## Features (Current & Future Roadmap) 
 
 | Feature | Status | Description |
 |-------|--------|-----------|

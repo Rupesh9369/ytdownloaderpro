@@ -19,7 +19,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install pyinstaller yt-dlp pillow requests
+        pip install -r requirements.txt
     
     - name: Build Windows .exe
       run: |
@@ -30,7 +30,6 @@ jobs:
       with:
         name: windows-exe
         path: dist/YouTube Downloader Pro.exe
-        retention-days: 30
 
   build-macos:
     runs-on: macos-latest
@@ -44,7 +43,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip3 install pyinstaller yt-dlp pillow requests
+        pip3 install -r requirements.txt
     
     - name: Build macOS .app
       run: |
@@ -56,25 +55,34 @@ jobs:
       with:
         name: macos-app
         path: "YouTube Downloader Pro.app"
-        retention-days: 30
 
-  # Optional: Auto-create GitHub Release on tag push
   release:
-    needs: [build-windows, build-macos]
+    needs: [build-windows, build-macos]  # Wait for builds
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')  # Trigger on git tag (e.g., v1.0)
+    if: startsWith(github.ref, 'refs/tags/')  # Only on tags (e.g., v1.1.0)
+    permissions:
+      contents: write  # For creating releases
     steps:
     - uses: actions/checkout@v4
     
-    - name: Download Artifacts
+    - name: Download Windows Artifact
       uses: actions/download-artifact@v4
+      with:
+        name: windows-exe
+        path: windows-exe/
+    
+    - name: Download macOS Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: macos-app
+        path: macos-app/
     
     - name: Create Release
       uses: softprops/action-gh-release@v2
       with:
-        files: |
+        generate_release_notes: true  # Auto-generate changelog
+        files: |  # Upload files directly (no ZIP!)
           windows-exe/YouTube Downloader Pro.exe
           macos-app/YouTube Downloader Pro.app
-        generate_release_notes: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Auto-provided
