@@ -1,3 +1,4 @@
+# .github/workflows/build.yml
 name: Build Cross-Platform App
 
 on:
@@ -11,20 +12,22 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-    
-    - name: Install dependencies
+
+    - name: Install PyInstaller + Dependencies
       run: |
+        pip install --upgrade pip
+        pip install pyinstaller
         pip install -r requirements.txt
-    
+
     - name: Build Windows .exe
       run: |
         pyinstaller --onefile --windowed --icon=icon.ico --name="YouTube Downloader Pro" ytprodownloaderpro.py
-    
+
     - name: Upload Windows Artifact
       uses: actions/upload-artifact@v4
       with:
@@ -35,54 +38,43 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-    
-    - name: Install dependencies
+
+    - name: Install PyInstaller + Dependencies
       run: |
+        pip3 install --upgrade pip
+        pip3 install pyinstaller
         pip3 install -r requirements.txt
-    
+
     - name: Build macOS .app
       run: |
         pyinstaller --onefile --windowed --icon=icon.png --name="YouTube Downloader Pro" ytprodownloaderpro.py
         mv dist/"YouTube Downloader Pro.app" ./
-    
+
     - name: Upload macOS Artifact
       uses: actions/upload-artifact@v4
       with:
         name: macos-app
         path: "YouTube Downloader Pro.app"
 
+  # Optional: Auto-release on tag
   release:
-    needs: [build-windows, build-macos]  # Wait for builds
+    needs: [build-windows, build-macos]
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')  # Only on tags (e.g., v1.1.0)
+    if: startsWith(github.ref, 'refs/tags/')
     permissions:
-      contents: write  # For creating releases
+      contents: write
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Download Windows Artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: windows-exe
-        path: windows-exe/
-    
-    - name: Download macOS Artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: macos-app
-        path: macos-app/
-    
+    - uses: actions/download-artifact@v4
+
     - name: Create Release
       uses: softprops/action-gh-release@v2
       with:
-        generate_release_notes: true  # Auto-generate changelog
-        files: |  # Upload files directly (no ZIP!)
+        files: |
           windows-exe/YouTube Downloader Pro.exe
           macos-app/YouTube Downloader Pro.app
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Auto-provided
+        generate_release_notes: true
