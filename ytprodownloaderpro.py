@@ -10,7 +10,7 @@ import requests
 import zipfile
 import urllib.request
 from io import BytesIO
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk 
 
 # ===================== CONFIG =====================
 APP_NAME = "YouTube Downloader Pro"
