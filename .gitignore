@@ -3,3 +3,7 @@ __pycache__/
 dist/
 build/
 TEMP/
+build/youtubedownloaderpro/
+YouTube Downloader Pro.spec
+youtubedownloaderpro.spec
+version.txt
