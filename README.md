@@ -3,8 +3,9 @@
 **Download YouTube videos in HD, trim clips, extract MP3, and auto-save thumbnails — all in one click!**  
 **No ads. No bloat. 100% Free.**
 
-[![Download v0.0.2](https://img.shields.io/github/downloads/Rupesh9369/ytdownloaderpro/v0.0.2/total?style=for-the-badge&color=00d4aa)](https://github.com/Rupesh9369/ytdownloaderpro/releases/download/v0.0.2/YouTube_Downloader_Pro.exe)
+[![Download v0.0.2](https://img.shields.io/github/downloads/Rupesh9369/ytdownloaderpro/v0.0.2/total?style=for-the-badge&color=00d4aa)](https://github.com/Rupesh9369/ytdownloaderpro/raw/refs/heads/main/YouTube%20Downloader%20Pro.exe)
 
+[Download YouTube Downloader Pro v0.0.2 (.exe)](https://github.com/Rupesh9369/ytdownloaderpro/raw/refs/heads/main/YouTube%20Downloader%20Pro.exe)
 ---
 
 ## Screenshots
@@ -48,7 +49,6 @@
 
 ## Download
 
-[Download YouTube Downloader Pro v0.0.2 (.exe)](https://github.com/Rupesh9369/ytdownloaderpro/releases/download/v0.0.2/YouTube_Downloader_Pro.exe)
 
 ---
 
