@@ -14,7 +14,7 @@
 ### Windows Users
 **Click below to download the standalone `.exe` file:**
 
-[Download YouTube Downloader Pro.exe](https://raw.githubusercontent.com/Rupesh9369/ytdownloaderpro/refs/heads/main/YouTube%20Downloader%20Pro.exe)
+[Download YouTube Downloader Pro.exe](blob:https://github.com/27856c55-8eb1-4ef3-97b2-f060cd77056b)
 
 > Double-click to run. First launch auto-downloads FFmpeg (30 seconds).
 
